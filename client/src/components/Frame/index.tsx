@@ -30,7 +30,7 @@ export default function Frame(props: JSX.IntrinsicElements["group"]) {
       ? [Math.PI / 2, 0, 0]
       : [0, (3 * Math.PI) / 2, -Math.PI / 2];
   const groupRef = useRef<THREE.Group>(null!);
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (!paintContext?.loop) return;
     if (paintContext?.position === "down") {
       groupRef.current.rotateX(delta);
