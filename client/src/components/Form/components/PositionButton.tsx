@@ -6,6 +6,12 @@ export default function PositionButton() {
   const paintContext = useContext(PaintContext);
   const handlePosition: MouseEventHandler<HTMLButtonElement> = () => {
     paintContext?.setPosition(togglePosition(paintContext.position!));
+    paintContext?.setFrame(
+      paintContext.frame.replace(
+        paintContext?.position,
+        paintContext?.position === "down" ? "up" : "down"
+      )
+    );
   };
   return (
     <button onClick={handlePosition} className="btn btn-neutral">

@@ -7,7 +7,7 @@ import { createContext, useState } from "react";
 export const PaintContext = createContext<PaintingContext | null>(null);
 function App() {
   const [paint, setPaint] = useState<string>("");
-  const [frame, setFrame] = useState<string>("");
+  const [frame, setFrame] = useState<string>("box-frame-up");
   const [position, setPosition] = useState<"up" | "down">("up");
   const [loop, setLoop] = useState(true);
   return (
