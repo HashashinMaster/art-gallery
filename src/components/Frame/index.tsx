@@ -1,10 +1,10 @@
 import { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-import { useFrame } from "@react-three/fiber";
+import { Euler, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import { useContext } from "react";
-import { PaintContext } from "../App";
+import { PaintContext } from "../../App";
 type GLTFResult = GLTF & {
   nodes: {
     frame: THREE.Mesh;
@@ -31,6 +31,7 @@ export default function Frame(props: JSX.IntrinsicElements["group"]) {
       : [0, (3 * Math.PI) / 2, -Math.PI / 2];
   const groupRef = useRef<THREE.Group>(null!);
   useFrame((state, delta) => {
+    if (!paintContext?.loop) return;
     if (paintContext?.position === "down") {
       groupRef.current.rotateX(delta);
     }
@@ -42,7 +43,7 @@ export default function Frame(props: JSX.IntrinsicElements["group"]) {
     <group
       ref={groupRef}
       scale={[3, 3, 3]}
-      rotation={rotation}
+      rotation={rotation as Euler}
       {...props}
       dispose={null}
     >
@@ -53,5 +54,3 @@ export default function Frame(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/assets/models/frames/box-frame-down.glb");
