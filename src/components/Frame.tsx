@@ -5,50 +5,53 @@ import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import { useContext } from "react";
 import { PaintContext } from "../App";
-
 type GLTFResult = GLTF & {
   nodes: {
     frame: THREE.Mesh;
     paint: THREE.Mesh;
   };
   materials: {
-    ["Material.002"]: THREE.MeshStandardMaterial;
+    T_frame: THREE.MeshStandardMaterial;
+    T_glass: THREE.MeshStandardMaterial;
   };
 };
-
 export default function Frame(props: JSX.IntrinsicElements["group"]) {
+  const paintContext = useContext(PaintContext);
   const { nodes, materials } = useGLTF(
-    "/assets/models/frames/box-frame.glb"
+    `/assets/models/frames/box-frame-${paintContext?.position}.glb`
   ) as GLTFResult;
-  const paint = useContext(PaintContext);
-  let uploadedPaint = useTexture(
-    paint?.paint! ? paint.paint : "/assets/textures/Mona_Lisa.jpg"
+  const paint = useTexture(
+    paintContext?.paint!
+      ? paintContext.paint
+      : `/assets/textures/default-${paintContext?.position}.jpg`
   );
-
+  const rotation =
+    paintContext?.position === "up"
+      ? [Math.PI / 2, 0, 0]
+      : [0, (3 * Math.PI) / 2, -Math.PI / 2];
   const groupRef = useRef<THREE.Group>(null!);
-  useFrame((state, delta) => (groupRef.current.rotation.z += delta));
+  useFrame((state, delta) => {
+    if (paintContext?.position === "down") {
+      groupRef.current.rotateX(delta);
+    }
+    if (paintContext?.position === "up") {
+      groupRef.current.rotation.z += delta;
+    }
+  });
   return (
     <group
-      {...props}
-      rotation={[Math.PI / 2, 0, 0]}
       ref={groupRef}
+      scale={[3, 3, 3]}
+      rotation={rotation}
+      {...props}
       dispose={null}
     >
-      <mesh
-        geometry={nodes.frame.geometry}
-        material={materials["Material.002"]}
-        rotation={[Math.PI / 2, 0, -Math.PI / 2]}
-      />
-      <mesh
-        geometry={nodes.paint.geometry}
-        position={[-0.08, 0, 0]}
-        rotation={[(Math.PI * 2) / 2, 0, -Math.PI / 2]}
-        scale={[1.02, 1, 1.03]}
-      >
-        <meshStandardMaterial attach={"material"} map={uploadedPaint} />
+      <mesh geometry={nodes.frame.geometry} material={materials.T_frame} />
+      <mesh geometry={nodes.paint.geometry}>
+        <meshStandardMaterial map={paint} />
       </mesh>
     </group>
   );
 }
 
-useGLTF.preload("/assets/models/frames/box-frame.glb");
+useGLTF.preload("/assets/models/frames/box-frame-down.glb");
