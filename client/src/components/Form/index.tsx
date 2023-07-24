@@ -25,8 +25,15 @@ export default function Form() {
   return (
     <IconContext.Provider value={{ size: "1.25rem" }}>
       <div className="w-2/5 p-2">
-        <h1 className="mb-2">Tools:</h1>
-
+        <label className="label">
+          <span className="label-text">Paint name</span>
+        </label>
+        <input
+          type="text"
+          placeholder="eg. Monaliza"
+          className="input input-bordered w-full max-w-xs"
+        />
+        <h1 className="my-2">Tools:</h1>
         <div className="flex gap-2">
           <div className="tooltip" data-tip="Add paint">
             <button onClick={handleInput} className="btn btn-neutral">
@@ -47,6 +54,10 @@ export default function Form() {
             <LoopButton />
           </div>
         </div>
+        <textarea
+          className="textarea textarea-bordered w-full max-w-xs mt-4"
+          placeholder="Paint description"
+        ></textarea>
       </div>
     </IconContext.Provider>
   );

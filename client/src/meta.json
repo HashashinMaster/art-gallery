@@ -1,0 +1,12 @@
+{
+  "form": {
+    "frames": [
+      {
+        "boxFrame": {
+          "up": "/assets/models/frames/box-frame-up.glb",
+          "down": "/assets/models/frames/box-frame-down.glb"
+        }
+      }
+    ]
+  }
+}
