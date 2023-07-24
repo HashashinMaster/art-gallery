@@ -5,7 +5,7 @@ import { AiOutlineFormatPainter } from "react-icons/ai";
 import Avatar from "./components/Avatar";
 import { IconContext } from "react-icons";
 import LoopButton from "./components/LoopButton";
-
+import voices from "./voices.json";
 export default function Form() {
   const paintContext = useContext(PaintContext);
   const paintRef = useRef<HTMLInputElement>(null!);
@@ -56,8 +56,16 @@ export default function Form() {
         </div>
         <textarea
           className="textarea textarea-bordered w-full max-w-xs mt-4"
-          placeholder="Paint description"
+          placeholder="Paint short description"
         ></textarea>
+        <label className="label">
+          <span className="label-text">AI Voice</span>
+        </label>
+        <select className="input w-full max-w-xs ">
+          {voices.voices.map((voice) => (
+            <option value={voice.voice_id}>{voice.name}</option>
+          ))}
+        </select>
       </div>
     </IconContext.Provider>
   );
