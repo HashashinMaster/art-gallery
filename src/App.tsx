@@ -8,10 +8,20 @@ export const PaintContext = createContext<PaintingContext | null>(null);
 function App() {
   const [paint, setPaint] = useState<string>("");
   const [frame, setFrame] = useState<string>("");
-  const [position, setPosition] = useState<"up" | "down">("down");
+  const [position, setPosition] = useState<"up" | "down">("up");
+  const [loop, setLoop] = useState(true);
   return (
     <PaintContext.Provider
-      value={{ paint, frame, position, setPaint, setFrame, setPosition }}
+      value={{
+        paint,
+        frame,
+        position,
+        loop,
+        setLoop,
+        setPaint,
+        setFrame,
+        setPosition,
+      }}
     >
       <div className="flex h-screen">
         <Form />
