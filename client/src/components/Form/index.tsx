@@ -6,6 +6,7 @@ import Avatar from "./components/Avatar";
 import { IconContext } from "react-icons";
 import LoopButton from "./components/LoopButton";
 import voices from "./voices.json";
+import axios from "axios";
 export default function Form() {
   const paintContext = useContext(PaintContext);
   const paintRef = useRef<HTMLInputElement>(null!);
@@ -24,7 +25,7 @@ export default function Form() {
   };
   return (
     <IconContext.Provider value={{ size: "1.25rem" }}>
-      <div className="w-2/5 p-2">
+      <div className="w-4/12  p-2">
         <label className="label">
           <span className="label-text">Paint name</span>
         </label>
@@ -34,7 +35,7 @@ export default function Form() {
           className="input input-bordered w-full max-w-xs"
         />
         <h1 className="my-2">Tools:</h1>
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-center">
           <div className="tooltip" data-tip="Add paint">
             <button onClick={handleInput} className="btn btn-neutral">
               <AiOutlineFormatPainter />
@@ -61,11 +62,16 @@ export default function Form() {
         <label className="label">
           <span className="label-text">AI Voice</span>
         </label>
-        <select className="input w-full max-w-xs ">
+        <select className="input w-full max-w-xs mb-4 select-bordered">
           {voices.voices.map((voice) => (
-            <option value={voice.voice_id}>{voice.name}</option>
+            <option value={voice.voice_id} key={voice.voice_id}>
+              {voice.name}
+            </option>
           ))}
         </select>
+        <button className="w-full max-w-xs btn btn-outline btn-info">
+          Confirm
+        </button>
       </div>
     </IconContext.Provider>
   );
