@@ -5,7 +5,7 @@ import router from "./router";
 import mongoose from "mongoose";
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/test")
+  .connect("mongodb://127.0.0.1:27017/art_gallery")
   .then(() => console.log("Db connected!"));
 dotenv.config();
 
@@ -19,5 +19,6 @@ if (process.env.MOD === "PROD") {
   });
 }
 app.use(express.json());
+app.use(express.static("uploads"));
 app.use("/api", router);
 app.listen(8080, () => console.log("server is listening at port 8080"));
