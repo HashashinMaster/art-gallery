@@ -13,6 +13,18 @@ const paintSchema = new Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  aiVoice: {
+    type: String,
+    required: true,
+  },
 });
 
 export default model("Paint", paintSchema);
