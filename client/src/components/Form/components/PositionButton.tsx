@@ -1,5 +1,5 @@
 import { BsFillImageFill, BsFillFileImageFill } from "react-icons/bs";
-import { PaintContext } from "../../../App";
+import { PaintContext } from "../../../pages/Add";
 import { MouseEventHandler, useContext } from "react";
 
 export default function PositionButton() {

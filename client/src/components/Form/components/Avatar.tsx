@@ -1,4 +1,4 @@
-import { PaintContext } from "../../../App";
+import { PaintContext } from "../../../pages/Add";
 import { useContext } from "react";
 export default function Avatar() {
   const paintContext = useContext(PaintContext);
