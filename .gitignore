@@ -1,4 +1,5 @@
 node_modules
 dist
 .env
-uploads/*.jpg
+uploads/images/*.jpg
+uploads/audios/*.mp3
