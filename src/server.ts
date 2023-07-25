@@ -18,5 +18,6 @@ if (process.env.MOD === "PROD") {
     res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
   });
 }
+app.use(express.json());
 app.use("/api", router);
 app.listen(8080, () => console.log("server is listening at port 8080"));
