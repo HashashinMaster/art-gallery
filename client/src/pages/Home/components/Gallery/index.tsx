@@ -1,8 +1,9 @@
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF, useTexture } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { GLTF } from "three-stdlib";
 import { useEffect } from "react";
 import { gsap } from "gsap";
+import Frame from "./components/Frame";
 type GLTFResult = GLTF & {
   nodes: {
     Object_2: THREE.Mesh;
@@ -17,6 +18,7 @@ export default function Gallery() {
   const { nodes, materials } = useGLTF(
     "/assets/models/gallery.glb"
   ) as GLTFResult;
+
   const { camera } = useThree();
   useEffect(() => {
     const closingTheCamera = () => {
@@ -38,6 +40,14 @@ export default function Gallery() {
       onComplete: rotateCamera,
     });
   });
+  const framesPositions = {
+    frame1: [4.54, 2.06, 3.83],
+    frame2: [4.54, 2.06, -0.19],
+    frame3: [4.54, 2.06, -4.2],
+    frame4: [-4.5, 2.06, 3.85],
+    frame5: [-4.5, 2.06, -0.16],
+    frame6: [-4.5, 2.06, -4.19],
+  };
   return (
     <group position={[0, -3, -8]} rotation={[0, Math.PI, 0]} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -54,17 +64,8 @@ export default function Gallery() {
           material={materials.material}
         />
       </group>
-      //paint 1 position
-      <group position={[-4.5, 2.06, -4.19]}></group>
-      //paint 1 position
-      <group position={[-4.5, 2.06, -0.16]} />
-      //paint 1 position
-      <group position={[-4.5, 2.06, 3.85]} />
-      //paint 1 position
-      <group position={[4.54, 2.06, -4.2]} />
-      //paint 1 position
-      <group position={[4.54, 2.06, 3.83]} />
-      //paint 1 position
+
+      <OrbitControls />
     </group>
   );
 }
