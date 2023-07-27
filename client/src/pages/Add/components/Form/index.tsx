@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useContext, useRef } from "react";
-import { PaintContext } from "../../pages/Add";
+import { PaintContext } from "../../";
 import PositionButton from "./components/PositionButton";
 import { AiOutlineFormatPainter } from "react-icons/ai";
 import Avatar from "./components/Avatar";

@@ -1,4 +1,4 @@
-import { PaintContext } from "../../../pages/Add";
+import { PaintContext } from "../../../";
 import { useContext } from "react";
 import { RiLoopRightLine } from "react-icons/ri";
 import { LuPersonStanding } from "react-icons/lu";

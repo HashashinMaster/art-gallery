@@ -1,4 +1,4 @@
-import Gallery from "../components/Gallery";
+import Gallery from "./components/Gallery";
 import { Canvas } from "@react-three/fiber";
 export default function App() {
   return (

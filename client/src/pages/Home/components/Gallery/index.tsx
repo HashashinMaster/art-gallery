@@ -15,7 +15,7 @@ type GLTFResult = GLTF & {
 
 export default function Gallery() {
   const { nodes, materials } = useGLTF(
-    "/assets/models/rusty_metal_gallery.glb"
+    "/assets/models/gallery.glb"
   ) as GLTFResult;
   const { camera } = useThree();
   useEffect(() => {
@@ -54,8 +54,18 @@ export default function Gallery() {
           material={materials.material}
         />
       </group>
-      {/* <OrbitControls /> */}
+      //paint 1 position
+      <group position={[-4.5, 2.06, -4.19]}></group>
+      //paint 1 position
+      <group position={[-4.5, 2.06, -0.16]} />
+      //paint 1 position
+      <group position={[-4.5, 2.06, 3.85]} />
+      //paint 1 position
+      <group position={[4.54, 2.06, -4.2]} />
+      //paint 1 position
+      <group position={[4.54, 2.06, 3.83]} />
+      //paint 1 position
     </group>
   );
 }
-useGLTF.preload("/assets/models/rusty_metal_gallery.glb");
+useGLTF.preload("/assets/models/gallery.glb");

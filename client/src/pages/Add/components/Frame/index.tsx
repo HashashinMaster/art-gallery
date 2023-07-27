@@ -4,7 +4,7 @@ import { GLTF } from "three-stdlib";
 import { Euler, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import { useContext } from "react";
-import { PaintContext } from "../../pages/Add";
+import { PaintContext } from "../..";
 type GLTFResult = GLTF & {
   nodes: {
     frame: THREE.Mesh;
