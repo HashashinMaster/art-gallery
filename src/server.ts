@@ -19,6 +19,6 @@ if (process.env.MOD === "PROD") {
   });
 }
 app.use(express.json());
-app.use(express.static("uploads"));
+app.use("/storage", express.static("uploads"));
 app.use("/api", router);
 app.listen(8080, () => console.log("server is listening at port 8080"));
