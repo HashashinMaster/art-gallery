@@ -9,3 +9,19 @@ declare interface PaintingContext {
   setPosition: (src: "up" | "down") => void;
   setLoop: (shoudLoop: boolean) => void;
 }
+
+declare interface Paint {
+  _id: string;
+  name: string;
+  frame: string;
+  position: "up" | "down";
+  aiVoice: string;
+  description: string;
+  paint: string;
+}
+
+declare interface PaintsResponse {
+  success: boolean;
+  data?: Array<Paint>;
+  message?: string;
+}
