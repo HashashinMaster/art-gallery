@@ -7,7 +7,9 @@ import { IconContext } from "react-icons";
 import LoopButton from "./components/LoopButton";
 import voices from "./voices.json";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 export default function Form() {
+  const navigate = useNavigate();
   const paintNameRef = useRef<HTMLInputElement>(null!);
   const paintDescriptionRef = useRef<HTMLTextAreaElement>(null!);
   const paintAiVoiceRef = useRef<HTMLSelectElement>(null!);
@@ -18,7 +20,6 @@ export default function Form() {
     const reader = new FileReader();
     reader.onload = () => {
       // Base64 Data URL 👇
-      console.log(reader.result);
       paintContext?.setPaint(reader.result as string);
     };
     reader.readAsDataURL(image);
@@ -42,6 +43,7 @@ export default function Form() {
         "Content-Type": "multipart/form-data",
       },
     });
+    navigate("/");
   };
   return (
     <IconContext.Provider value={{ size: "1.25rem" }}>
