@@ -1,4 +1,6 @@
 import { useGLTF, useTexture } from "@react-three/drei";
+import { Euler } from "@react-three/fiber";
+import { useRef } from "react";
 import { GLTF } from "three-stdlib";
 type GLTFFrame = GLTF & {
   nodes: {
@@ -10,19 +12,34 @@ type GLTFFrame = GLTF & {
     T_glass: THREE.MeshStandardMaterial;
   };
 };
-export default function Frame() {
+interface Props {
+  position: string;
+  paint: string;
+  frame: string;
+}
+export default function Frame({ position, paint, frame }: Props) {
   const { nodes: frameNodes, materials: frameMaterials } = useGLTF(
-    `/assets/models/frames/box-frame-up.glb`
+    `/assets/models/frames/${frame}.glb`
   ) as GLTFFrame;
-  const paint = useTexture(`/assets/textures/default-up.jpg`);
+  const paintTexture = useTexture(`/storage/images/${paint}`);
+  const frameRef = useRef<THREE.Group>(null!);
+  const rotation =
+    position === "up"
+      ? [Math.PI / 2, 0, Math.PI / 2]
+      : [Math.PI, 0, Math.PI / 2];
   return (
-    <group scale={[3, 3, 3]} dispose={null}>
+    <group
+      scale={[1, 1, 1]}
+      ref={frameRef}
+      rotation={rotation as Euler}
+      dispose={null}
+    >
       <mesh
         geometry={frameNodes.frame.geometry}
         material={frameMaterials.T_frame}
       />
       <mesh geometry={frameNodes.paint.geometry}>
-        <meshStandardMaterial map={paint} />
+        <meshStandardMaterial map={paintTexture} />
       </mesh>
     </group>
   );
