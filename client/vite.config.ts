@@ -12,6 +12,9 @@ export default defineConfig({
       "/api": {
         target: process.env.HOST,
       },
+      "/storage": {
+        target: process.env.HOST,
+      },
     },
   },
 });
