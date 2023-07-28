@@ -29,7 +29,7 @@ export default class PaintController {
 
   static async all(req: Request, res: Response) {
     try {
-      const paints = await Paint.find();
+      const paints = await Paint.find().sort({ _id: -1 });
       return res.send({
         success: true,
         data: paints,
