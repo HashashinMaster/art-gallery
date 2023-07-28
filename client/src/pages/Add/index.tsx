@@ -1,7 +1,8 @@
 import { Canvas } from "@react-three/fiber";
 import Frame from "./components/Frame";
 import Form from "./components/Form";
-import { createContext, useState } from "react";
+import { createContext, useState, Suspense } from "react";
+import Loading from "../../components/Loading";
 
 export const PaintContext = createContext<PaintingContext | null>(null);
 function Home() {
@@ -23,12 +24,14 @@ function Home() {
       }}
     >
       <div className="flex h-screen">
-        <Form />
-        <Canvas>
-          <ambientLight />
-          <pointLight position={[10, 10, 10]} />
-          <Frame />
-        </Canvas>
+        <Suspense fallback={<Loading />}>
+          <Form />
+          <Canvas>
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
+            <Frame />
+          </Canvas>
+        </Suspense>
       </div>
     </PaintContext.Provider>
   );
