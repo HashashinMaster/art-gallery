@@ -1,4 +1,4 @@
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, Html } from "@react-three/drei";
 import { Vector3, useThree } from "@react-three/fiber";
 import { GLTF } from "three-stdlib";
 import { useEffect, useState } from "react";
@@ -56,25 +56,25 @@ export default function Gallery() {
     frame4: [-4.5, 2.06, -0.16],
     frame5: [-4.5, 2.06, -4.19],
   };
-
   return (
-    !loading && (
-      <group position={[0, -3, -8]} rotation={[0, Math.PI, 0]} dispose={null}>
-        <group rotation={[-Math.PI / 2, 0, 0]}>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Object_2.geometry}
-            material={materials.material}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Object_3.geometry}
-            material={materials.material}
-          />
-        </group>
-        {paints.map((paint, key) => (
+    <group position={[0, -3, -8]} rotation={[0, Math.PI, 0]} dispose={null}>
+      <group rotation={[-Math.PI / 2, 0, 0]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_2.geometry}
+          material={materials.material}
+        />
+
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_3.geometry}
+          material={materials.material}
+        />
+      </group>
+      {paints.map((paint, key) => {
+        return (
           <group
             key={paint._id}
             position={
@@ -83,26 +83,31 @@ export default function Gallery() {
               ] as Vector3
             }
           >
+            <Html as="div" position={[-1.03, 0, 0.07]}>
+              <p className="text-red-400 font-art">{paint.name}</p>
+            </Html>
             <Frame {...paint} />
+            <axesHelper />
           </group>
-        ))}
-      </group>
-    )
+        );
+      })}
+    </group>
   );
 }
 useGLTF.preload("/assets/models/gallery.glb");
 
-function usePaints(): [Paint[] | [], Boolean] {
+function usePaints(): [Paint[] | [], boolean] {
   const [paints, setPaints] = useState<Paint[] | []>([]);
-  const [loading, setLoading] = useState<Boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const fetchPaints = async () => {
+    setLoading(true);
     const { data } = await axios.get<PaintsResponse>("/api/paints");
     if (data.success) {
       setPaints(data.data!);
+      setLoading(false);
     } else {
       console.log(data.message);
     }
-    setLoading(false);
   };
   useEffect(() => {
     fetchPaints();
