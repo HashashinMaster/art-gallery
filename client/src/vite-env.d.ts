@@ -13,6 +13,15 @@ declare interface LoadingContext {
   loading: boolean;
   setLoading: (loading: boolean) => void;
 }
+
+declare interface SliderContext {
+  index: number;
+  setIndex: (index: number) => void;
+  lastIndex: boolean;
+  setLastIndex: (isLastIndex: boolean) => void;
+  startSliding: boolean;
+  setStartSliding: (isSliding: boolean) => void;
+}
 declare interface Paint {
   _id: string;
   name: string;
