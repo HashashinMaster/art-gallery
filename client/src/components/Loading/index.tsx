@@ -1,12 +1,14 @@
+import { useProgress } from "@react-three/drei";
 export default function Loading() {
+  const { progress } = useProgress();
   return (
     <div
-      className="inset-0 bg-gray-800 fixed flex w-full h-full items-center justify-center duration-300 transition-opacity"
+      className="inset-0 bg-gray-800 fixed flex w-full h-full items-center justify-center duration-300 flex-col transition-opacity"
       style={{ zIndex: 6000 }}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="m-auto block"
+        className=" block"
         width="200px"
         height="200px"
         viewBox="0 0 100 100"
@@ -102,6 +104,7 @@ export default function Loading() {
           ></animateTransform>
         </path>
       </svg>
+      {progress.toFixed(2)} % loaded
     </div>
   );
 }
