@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import Frame from "./components/Frame";
 import axios from "axios";
+import Slider from "./components/Slider";
 type GLTFResult = GLTF & {
   nodes: {
     Object_2: THREE.Mesh;
@@ -22,8 +23,8 @@ export default function Gallery() {
 
   const { camera } = useThree();
   const [paints, loading] = usePaints();
-  if (paints.length > 6) {
-    paints.length = 6;
+  if (paints.length > 5) {
+    paints.length = 5;
   }
   useEffect(() => {
     const closingTheCamera = () => {
@@ -47,7 +48,7 @@ export default function Gallery() {
         onComplete: rotateCamera,
       });
     }
-  });
+  }, [loading]);
   const framesPositions = {
     frame0: [4.54, 2.06, 3.83],
     frame1: [4.54, 2.06, -0.19],
@@ -75,22 +76,24 @@ export default function Gallery() {
       </group>
       {paints.map((paint, key) => {
         return (
-          <group
-            key={paint._id}
-            position={
-              framesPositions[
-                `frame${key}` as keyof typeof framesPositions
-              ] as Vector3
-            }
-          >
-            <Html as="div" position={[-1.03, 0, 0.07]}>
-              <p className="text-red-400 font-art">{paint.name}</p>
-            </Html>
-            <Frame {...paint} />
-            <axesHelper />
-          </group>
+          key > 0 && (
+            <group
+              key={paint._id}
+              position={
+                framesPositions[
+                  `frame${key}` as keyof typeof framesPositions
+                ] as Vector3
+              }
+            >
+              <Html as="div" position={[-1.03, 0, 0.07]}>
+                <p className="text-red-400 font-art">{paint.name}</p>
+              </Html>
+              <Frame {...paint} />
+            </group>
+          )
         );
       })}
+      {!loading && <Slider paints={paints} />}
     </group>
   );
 }
