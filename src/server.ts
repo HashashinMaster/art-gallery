@@ -4,10 +4,10 @@ import dotenv from "dotenv";
 import router from "./router";
 import mongoose from "mongoose";
 
-mongoose
-  .connect("mongodb://127.0.0.1:27017/art_gallery")
-  .then(() => console.log("Db connected!"));
 dotenv.config();
+mongoose
+  .connect(`${process.env.DB_HOST}/${process.env.DB_NAME}`)
+  .then(() => console.log("Db connected!"));
 
 const app = express();
 
