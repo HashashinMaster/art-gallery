@@ -9,7 +9,10 @@ declare interface PaintingContext {
   setPosition: (src: "up" | "down") => void;
   setLoop: (shoudLoop: boolean) => void;
 }
-
+declare interface LoadingContext {
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
+}
 declare interface Paint {
   _id: string;
   name: string;
