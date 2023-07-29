@@ -21,6 +21,8 @@ declare interface SliderContext {
   setLastIndex: (isLastIndex: boolean) => void;
   startSliding: boolean;
   setStartSliding: (isSliding: boolean) => void;
+  slidePosition: "right" | "left";
+  setSlidePosition: (position: "right" | "left") => void;
 }
 declare interface Paint {
   _id: string;
