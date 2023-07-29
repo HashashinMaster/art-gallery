@@ -1,6 +1,5 @@
-import { Html, OrbitControls } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 import Frame from "../Frame";
-import { Vector3 } from "@react-three/fiber";
 import { useContext, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { SliderContext } from "../../../..";
@@ -17,27 +16,38 @@ export default function Slider({ paints }: Props) {
   const groupRef = useRef<THREE.Group>(null!);
   const resetPosition = () => {
     console.log(groupRef.current.position);
-    gsap.to(groupRef.current.position, { z: 3.83, duration: 1 });
+    gsap.to(groupRef.current.position, {
+      z: 3.83,
+      duration: 1,
+    });
   };
-  const goLeft = () => {
+  const goSlide = () => {
     setCurrentFrame({ ...paints[slider!.index] });
   };
+  const slidePositionMultiplier = slider?.slidePosition === "left" ? -1 : 1;
   useEffect(() => {
     if (slider?.index === paints.length - 1) slider.setLastIndex(true);
     if (slider?.index !== paints.length - 1 && slider?.lastIndex === true)
-      slider.setLastIndex(false);
+      console.log(slider?.startSliding);
     if (slider?.startSliding) {
       gsap.to(groupRef.current.position, {
-        z: 7,
+        z: 7 * slidePositionMultiplier,
         duration: 1,
-        onComplete: goLeft,
+        onComplete: goSlide,
       });
     }
+    console.log(groupRef.current.position);
   }, [slider?.index]);
 
   useEffect(() => {
-    groupRef.current.position.set(position[0], position[1], 1);
-    resetPosition();
+    if (slider?.startSliding) {
+      groupRef.current.position.set(
+        position[0],
+        position[1],
+        slider?.slidePosition === "left" ? -4 : 7
+      );
+      resetPosition();
+    }
   }, [currentFrame]);
   useEffect(() => {
     groupRef.current.position.set(position[0], position[1], position[2]);

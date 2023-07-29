@@ -9,6 +9,7 @@ export default function App() {
   const [index, setIndex] = useState(0);
   const [lastIndex, setLastIndex] = useState(false);
   const [startSliding, setStartSliding] = useState(false);
+  const [slidePosition, setSlidePosition] = useState<"right" | "left">("left");
   return (
     <div className="h-screen">
       <Suspense fallback={<Loading />}>
@@ -20,6 +21,8 @@ export default function App() {
             setIndex,
             startSliding,
             setStartSliding,
+            slidePosition,
+            setSlidePosition,
           }}
         >
           <Canvas>
