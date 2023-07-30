@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import Frame from "./components/Frame";
 import axios from "axios";
 import Slider from "./components/Slider";
+import TrackLight from "./components/TrackLight";
 type GLTFResult = GLTF & {
   nodes: {
     Object_2: THREE.Mesh;
@@ -29,7 +30,7 @@ export default function Gallery() {
   useEffect(() => {
     const closingTheCamera = () => {
       gsap.to(camera.position, {
-        x: -3,
+        x: -2.6,
       });
     };
     const rotateCamera = () => {
@@ -43,7 +44,7 @@ export default function Gallery() {
     if (!loading) {
       gsap.to(camera.position, {
         delay: 1,
-        z: -12,
+        z: -11.8,
         duration: 3,
         onComplete: rotateCamera,
       });
@@ -94,6 +95,7 @@ export default function Gallery() {
         );
       })}
       {!loading && <Slider paints={paints} />}
+      <TrackLight />
     </group>
   );
 }

@@ -2,7 +2,7 @@ import { Html } from "@react-three/drei";
 import Frame from "../Frame";
 import { useContext, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { SliderContext } from "../../../..";
+import { PlayContext, SliderContext } from "../../../..";
 interface Props {
   paints: Paint[];
 }
@@ -14,6 +14,16 @@ export default function Slider({ paints }: Props) {
     paints[slider!.index]
   );
   const groupRef = useRef<THREE.Group>(null!);
+  const playContext = useContext(PlayContext);
+  useEffect(() => {
+    const documentryAudio = new Audio();
+    documentryAudio.src = `/storage/audios/${currentFrame.aiVoice}`;
+    if (playContext?.play) {
+      documentryAudio.play();
+    } else {
+      documentryAudio.pause();
+    }
+  }, [playContext?.play]);
   const resetPosition = () => {
     console.log(groupRef.current.position);
     gsap.to(groupRef.current.position, {
@@ -31,12 +41,11 @@ export default function Slider({ paints }: Props) {
       console.log(slider?.startSliding);
     if (slider?.startSliding) {
       gsap.to(groupRef.current.position, {
-        z: 7 * slidePositionMultiplier,
+        z: 8 * slidePositionMultiplier,
         duration: 1,
         onComplete: goSlide,
       });
     }
-    console.log(groupRef.current.position);
   }, [slider?.index]);
 
   useEffect(() => {
@@ -54,8 +63,8 @@ export default function Slider({ paints }: Props) {
   }, []);
   return (
     <group ref={groupRef} key={currentFrame._id}>
-      <Html as="div" position={[-1.03, 0, 0.07]}>
-        <p className="text-red-400 font-art">{currentFrame.name}</p>
+      <Html as="div" position={[-1.3, 0, -0.05]}>
+        <p className="text-red-400 font-art text-xl">{currentFrame.name}</p>
       </Html>
       <Frame {...currentFrame} />
     </group>

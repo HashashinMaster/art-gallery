@@ -24,6 +24,11 @@ declare interface SliderContext {
   slidePosition: "right" | "left";
   setSlidePosition: (position: "right" | "left") => void;
 }
+declare interface PlayContext {
+  play: boolean;
+  setPlay: (isPlaying: boolean) => void;
+  ambientLightRef: React.MutableRefObject<AmbientLight>;
+}
 declare interface Paint {
   _id: string;
   name: string;

@@ -2,6 +2,7 @@ import { useGLTF, useTexture } from "@react-three/drei";
 import { Euler } from "@react-three/fiber";
 import { useRef } from "react";
 import { GLTF } from "three-stdlib";
+import { PlayContext } from "../../../..";
 type GLTFFrame = GLTF & {
   nodes: {
     frame: THREE.Mesh;
@@ -12,17 +13,14 @@ type GLTFFrame = GLTF & {
     T_glass: THREE.MeshStandardMaterial;
   };
 };
-interface Props {
-  position: string;
-  paint: string;
-  frame: string;
-}
-export default function Frame({ position, paint, frame }: Props) {
+
+export default function Frame({ position, paint, frame, aiVoice }: Paint) {
   const { nodes: frameNodes, materials: frameMaterials } = useGLTF(
     `/assets/models/frames/${frame}.glb`
   ) as GLTFFrame;
   const paintTexture = useTexture(`/storage/images/${paint}`);
   const frameRef = useRef<THREE.Group>(null!);
+
   const rotation =
     position === "up"
       ? [Math.PI / 2, 0, Math.PI / 2]
