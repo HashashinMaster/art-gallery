@@ -33,15 +33,24 @@ export default function TrackLight() {
       x: 4.54,
       duration: 1,
       onComplete: () => {
+        const spotLightOff = new Audio();
+        spotLightOff.src = "/assets/audios/spotlight-on.mp3";
+        spotLightOff.onended = () => {};
+        spotLightOff.play();
         gsap.to(playContext!.ambientLightRef!.current, {
           visible: false,
           duration: 0,
           delay: 0.5,
           onComplete: () => {
-            gsap.to(spotLightRef.current, {
-              visible: true,
-              delay: 1,
-            });
+            const spotLightOnAudio = new Audio();
+            spotLightOnAudio.src = "/assets/audios/spotlight-on.mp3";
+            spotLightOnAudio.play();
+            spotLightOnAudio.onplaying = () => {
+              spotLightRef.current.visible = true;
+            };
+            spotLightOnAudio.onended = () => {
+              playContext?.setStartAudio(true);
+            };
           },
         });
       },
@@ -50,6 +59,7 @@ export default function TrackLight() {
   const turnOffSpotLight = () => {
     spotLightRef.current.visible = false;
     playContext!.ambientLightRef!.current.visible = true;
+    playContext?.setStartAudio(false);
     gsap.to(lightTargetRef.current.position, {
       x: -5,
       duration: 2.5,

@@ -12,11 +12,14 @@ export default function App() {
   const [startSliding, setStartSliding] = useState(false);
   const [slidePosition, setSlidePosition] = useState<"right" | "left">("left");
   const [play, setPlay] = useState(false);
+  const [startAudio, setStartAudio] = useState(false);
   const ambientLightRef = useRef<THREE.AmbientLight>(null!);
   return (
     <div className="h-screen">
       <Suspense fallback={<Loading />}>
-        <PlayContext.Provider value={{ play, setPlay, ambientLightRef }}>
+        <PlayContext.Provider
+          value={{ play, setPlay, ambientLightRef, startAudio, setStartAudio }}
+        >
           <SliderContext.Provider
             value={{
               lastIndex,

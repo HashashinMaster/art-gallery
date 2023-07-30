@@ -18,12 +18,12 @@ export default function Slider({ paints }: Props) {
   useEffect(() => {
     const documentryAudio = new Audio();
     documentryAudio.src = `/storage/audios/${currentFrame.aiVoice}`;
-    if (playContext?.play) {
+    if (playContext?.startAudio) {
       documentryAudio.play();
     } else {
       documentryAudio.pause();
     }
-  }, [playContext?.play]);
+  }, [playContext?.startAudio]);
   const resetPosition = () => {
     console.log(groupRef.current.position);
     gsap.to(groupRef.current.position, {

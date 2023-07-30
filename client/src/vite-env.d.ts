@@ -27,6 +27,8 @@ declare interface SliderContext {
 declare interface PlayContext {
   play: boolean;
   setPlay: (isPlaying: boolean) => void;
+  startAudio: boolean;
+  setStartAudio: (start: boolean) => void;
   ambientLightRef: React.MutableRefObject<AmbientLight>;
 }
 declare interface Paint {
