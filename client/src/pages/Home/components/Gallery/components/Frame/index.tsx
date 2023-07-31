@@ -13,7 +13,12 @@ type GLTFFrame = GLTF & {
   };
 };
 
-export default function Frame({ position, paint, frame }: Paint) {
+export default function Frame({
+  position,
+  paint,
+  frame,
+  index,
+}: Paint & { index?: number }) {
   const { nodes: frameNodes, materials: frameMaterials } = useGLTF(
     `/assets/models/frames/${frame}.glb`
   ) as GLTFFrame;
@@ -22,8 +27,8 @@ export default function Frame({ position, paint, frame }: Paint) {
 
   const rotation =
     position === "up"
-      ? [Math.PI / 2, 0, Math.PI / 2]
-      : [Math.PI, 0, Math.PI / 2];
+      ? [Math.PI / 2, 0, index && index > 2 ? -Math.PI / 2 : Math.PI / 2]
+      : [Math.PI, index && index > 2 ? Math.PI : 0, Math.PI / 2];
   return (
     <group
       scale={[1, 1, 1]}

@@ -94,7 +94,7 @@ export default function Gallery() {
               <Html as="div" position={[-1.03, 0, 0.07]}>
                 <p className="text-red-400 font-art">{paint.name}</p>
               </Html>
-              <Frame {...paint} />
+              <Frame {...paint} index={key} />
             </group>
           )
         );
