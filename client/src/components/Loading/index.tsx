@@ -1,5 +1,8 @@
 import { useProgress } from "@react-three/drei";
-export default function Loading() {
+interface Props {
+  loadingGLTF?: boolean;
+}
+export default function Loading({ loadingGLTF = true }: Props) {
   const { progress } = useProgress();
   return (
     <div
@@ -104,7 +107,7 @@ export default function Loading() {
           ></animateTransform>
         </path>
       </svg>
-      {progress.toFixed(2)} % loaded
+      {loadingGLTF && progress.toFixed(2) + "% loaded"}
     </div>
   );
 }

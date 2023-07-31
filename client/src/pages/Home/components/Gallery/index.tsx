@@ -7,7 +7,7 @@ import Frame from "./components/Frame";
 import axios from "axios";
 import Slider from "./components/Slider";
 import TrackLight from "./components/TrackLight";
-import { ActionsContext, SliderContext } from "../..";
+import { ActionsContext } from "../..";
 type GLTFResult = GLTF & {
   nodes: {
     Object_2: THREE.Mesh;
