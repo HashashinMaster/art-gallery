@@ -13,15 +13,16 @@ export default function Slider({ paints }: Props) {
   const [currentFrame, setCurrentFrame] = useState<Paint>(
     paints[slider!.index]
   );
+  const [aiAudio, setAiAudio] = useState(
+    new Audio(`/storage/audios/${currentFrame.aiVoice}`)
+  );
   const groupRef = useRef<THREE.Group>(null!);
   const playContext = useContext(PlayContext);
   useEffect(() => {
-    const documentryAudio = new Audio();
-    documentryAudio.src = `/storage/audios/${currentFrame.aiVoice}`;
     if (playContext?.startAudio) {
-      documentryAudio.play();
+      aiAudio.play();
     } else {
-      documentryAudio.pause();
+      aiAudio.pause();
     }
   }, [playContext?.startAudio]);
   const resetPosition = () => {
@@ -56,6 +57,7 @@ export default function Slider({ paints }: Props) {
         slider?.slidePosition === "left" ? -4 : 7
       );
       resetPosition();
+      setAiAudio(new Audio(`/storage/audios/${currentFrame.aiVoice}`));
     }
   }, [currentFrame]);
   useEffect(() => {
