@@ -16,17 +16,26 @@ export default function Slider({ paints }: Props) {
   const [aiAudio, setAiAudio] = useState(
     new Audio(`/storage/audios/${currentFrame.aiVoice}`)
   );
+  const [backgroundMusic] = useState(
+    new Audio("assets/audios/backgroundmusic.mp3")
+  );
   const groupRef = useRef<THREE.Group>(null!);
   const playContext = useContext(PlayContext);
   useEffect(() => {
     aiAudio.currentTime = 0;
+    backgroundMusic.currentTime = 0;
+    backgroundMusic.volume = 0.5;
     if (playContext?.startAudio) {
-      aiAudio.play();
-      aiAudio.onplay = () => {
-        playContext.setDisablePlay(false);
+      backgroundMusic.play();
+      backgroundMusic.onplay = () => {
+        aiAudio.play();
+        aiAudio.onplay = () => {
+          playContext.setDisablePlay(false);
+        };
       };
     } else {
       aiAudio.pause();
+      backgroundMusic.pause();
     }
   }, [playContext?.startAudio]);
   const resetPosition = () => {
