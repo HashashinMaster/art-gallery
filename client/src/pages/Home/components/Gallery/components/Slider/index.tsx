@@ -19,6 +19,7 @@ export default function Slider({ paints }: Props) {
   const groupRef = useRef<THREE.Group>(null!);
   const playContext = useContext(PlayContext);
   useEffect(() => {
+    aiAudio.currentTime = 0;
     if (playContext?.startAudio) {
       aiAudio.play();
     } else {
@@ -26,7 +27,6 @@ export default function Slider({ paints }: Props) {
     }
   }, [playContext?.startAudio]);
   const resetPosition = () => {
-    console.log(groupRef.current.position);
     gsap.to(groupRef.current.position, {
       z: 3.83,
       duration: 1,
@@ -65,8 +65,17 @@ export default function Slider({ paints }: Props) {
   }, []);
   return (
     <group ref={groupRef} key={currentFrame._id}>
-      <Html as="div" position={[-1.3, 0, -0.05]}>
-        <p className="text-red-400 font-art text-xl">{currentFrame.name}</p>
+      <Html
+        as="div"
+        position={
+          currentFrame.position === "down"
+            ? [-1.34, 0, -0.19]
+            : [-1.34, 0, -0.14]
+        }
+      >
+        <p className="text-red-400 w-[500px] font-art text-xl">
+          {currentFrame.name}
+        </p>
       </Html>
       <Frame {...currentFrame} />
     </group>
