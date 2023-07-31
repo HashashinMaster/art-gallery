@@ -26,9 +26,6 @@ export default function Gallery() {
   const { camera } = useThree();
   const [paints, loading] = usePaints();
   const actionsContext = useContext(ActionsContext);
-  if (paints.length > 5) {
-    paints.length = 5;
-  }
   useEffect(() => {
     const closingTheCamera = () => {
       gsap.to(camera.position, {
@@ -80,7 +77,7 @@ export default function Gallery() {
           material={materials.material}
         />
       </group>
-      {paints.map((paint, key) => {
+      {paints.slice(0, 6).map((paint, key) => {
         return (
           key > 0 && (
             <group
