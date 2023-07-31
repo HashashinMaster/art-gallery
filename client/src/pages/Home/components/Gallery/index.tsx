@@ -1,12 +1,13 @@
 import { useGLTF, Html } from "@react-three/drei";
 import { Vector3, useThree } from "@react-three/fiber";
 import { GLTF } from "three-stdlib";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { gsap } from "gsap";
 import Frame from "./components/Frame";
 import axios from "axios";
 import Slider from "./components/Slider";
 import TrackLight from "./components/TrackLight";
+import { ActionsContext, SliderContext } from "../..";
 type GLTFResult = GLTF & {
   nodes: {
     Object_2: THREE.Mesh;
@@ -24,6 +25,7 @@ export default function Gallery() {
 
   const { camera } = useThree();
   const [paints, loading] = usePaints();
+  const actionsContext = useContext(ActionsContext);
   if (paints.length > 5) {
     paints.length = 5;
   }
@@ -31,6 +33,9 @@ export default function Gallery() {
     const closingTheCamera = () => {
       gsap.to(camera.position, {
         x: -2.6,
+        onComplete: () => {
+          actionsContext?.setShowActions(true);
+        },
       });
     };
     const rotateCamera = () => {
