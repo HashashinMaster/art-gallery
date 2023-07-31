@@ -2,7 +2,6 @@ import { useGLTF, useTexture } from "@react-three/drei";
 import { Euler } from "@react-three/fiber";
 import { useRef } from "react";
 import { GLTF } from "three-stdlib";
-import { PlayContext } from "../../../..";
 type GLTFFrame = GLTF & {
   nodes: {
     frame: THREE.Mesh;
@@ -14,7 +13,7 @@ type GLTFFrame = GLTF & {
   };
 };
 
-export default function Frame({ position, paint, frame, aiVoice }: Paint) {
+export default function Frame({ position, paint, frame }: Paint) {
   const { nodes: frameNodes, materials: frameMaterials } = useGLTF(
     `/assets/models/frames/${frame}.glb`
   ) as GLTFFrame;

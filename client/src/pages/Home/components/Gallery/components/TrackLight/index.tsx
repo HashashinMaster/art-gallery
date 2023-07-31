@@ -28,29 +28,35 @@ export default function TrackLight() {
   const lightTargetRef = useRef<THREE.Group>(null!);
   const playContext = useContext(PlayContext);
   const turnOnSpotLight = () => {
-    lightTargetRef.current.visible = true;
-    gsap.to(lightTargetRef.current.position, {
-      x: 4.54,
-      duration: 1,
+    playContext?.setDisablePlay(true);
+    gsap.to(lightTargetRef.current, {
+      visible: true,
+      delay: 0,
       onComplete: () => {
-        const spotLightOff = new Audio();
-        spotLightOff.src = "/assets/audios/spotlight-on.mp3";
-        spotLightOff.onended = () => {};
-        spotLightOff.play();
-        gsap.to(playContext!.ambientLightRef!.current, {
-          visible: false,
-          duration: 0,
-          delay: 0.5,
+        gsap.to(lightTargetRef.current.position, {
+          x: 4.54,
+          duration: 1,
           onComplete: () => {
-            const spotLightOnAudio = new Audio();
-            spotLightOnAudio.src = "/assets/audios/spotlight-on.mp3";
-            spotLightOnAudio.play();
-            spotLightOnAudio.onplaying = () => {
-              spotLightRef.current.visible = true;
-            };
-            spotLightOnAudio.onended = () => {
-              playContext?.setStartAudio(true);
-            };
+            const spotLightOff = new Audio();
+            spotLightOff.src = "/assets/audios/spotlight-on.mp3";
+            spotLightOff.play();
+
+            gsap.to(playContext!.ambientLightRef!.current, {
+              visible: false,
+              duration: 0,
+              delay: 0.5,
+              onComplete: () => {
+                const spotLightOnAudio = new Audio();
+                spotLightOnAudio.src = "/assets/audios/spotlight-on.mp3";
+                spotLightOnAudio.play();
+                spotLightOnAudio.onplaying = () => {
+                  spotLightRef.current.visible = true;
+                };
+                spotLightOnAudio.onended = () => {
+                  playContext?.setStartAudio(true);
+                };
+              },
+            });
           },
         });
       },
@@ -58,6 +64,9 @@ export default function TrackLight() {
   };
   const turnOffSpotLight = () => {
     spotLightRef.current.visible = false;
+    //so play button does not get disabled on the first render
+    if (playContext!.ambientLightRef!.current.visible === false)
+      playContext?.setDisablePlay(true);
     playContext!.ambientLightRef!.current.visible = true;
     playContext?.setStartAudio(false);
     gsap.to(lightTargetRef.current.position, {
@@ -65,6 +74,7 @@ export default function TrackLight() {
       duration: 2.5,
       onComplete: () => {
         lightTargetRef.current.visible = false;
+        playContext?.setDisablePlay(false);
       },
     });
   };
@@ -72,7 +82,6 @@ export default function TrackLight() {
     if (playContext?.play) {
       turnOnSpotLight();
     } else {
-      console.log("called for no reason");
       turnOffSpotLight();
     }
   }, [playContext!.play]);

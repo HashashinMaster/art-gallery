@@ -22,6 +22,9 @@ export default function Slider({ paints }: Props) {
     aiAudio.currentTime = 0;
     if (playContext?.startAudio) {
       aiAudio.play();
+      aiAudio.onplay = () => {
+        playContext.setDisablePlay(false);
+      };
     } else {
       aiAudio.pause();
     }

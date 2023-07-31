@@ -8,13 +8,18 @@ export default function Play() {
   const togglePlay = () => {
     playContext?.setPlay(!playContext.play);
   };
+  console.log(playContext?.disablePlay);
   return (
     <div
       className={`absolute bottom-2 w-screen ${
         !actionsContext?.showActions ? "hidden" : "flex"
       }  justify-center `}
     >
-      <button onClick={togglePlay} className="btn btn-neutral rounded-full">
+      <button
+        onClick={togglePlay}
+        disabled={playContext?.disablePlay}
+        className="btn btn-neutral rounded-full"
+      >
         {!playContext!.play ? <BsFillPlayFill /> : <BsFillStopFill />}
       </button>
     </div>
