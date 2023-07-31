@@ -32,6 +32,9 @@ export default function Slider({ paints }: Props) {
         aiAudio.onplay = () => {
           playContext.setDisablePlay(false);
         };
+        aiAudio.onended = () => {
+          playContext?.setPlay(false);
+        };
       };
     } else {
       aiAudio.pause();
