@@ -31,6 +31,10 @@ declare interface PlayContext {
   setStartAudio: (start: boolean) => void;
   ambientLightRef: React.MutableRefObject<AmbientLight>;
 }
+declare interface ActionsContext {
+  showActions: boolean;
+  setShowActions: (show: boolean) => void;
+}
 declare interface Paint {
   _id: string;
   name: string;
