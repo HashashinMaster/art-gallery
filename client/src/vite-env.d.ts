@@ -30,6 +30,8 @@ declare interface PlayContext {
   startAudio: boolean;
   setStartAudio: (start: boolean) => void;
   ambientLightRef: React.MutableRefObject<AmbientLight>;
+  disablePlay: boolean;
+  setDisablePlay: (disable: boolean) => void;
 }
 declare interface ActionsContext {
   showActions: boolean;
