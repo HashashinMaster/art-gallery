@@ -96,7 +96,15 @@ cd ../server
 npm run build
 ```
 
-2. Start the production server.
+2. Set the `MOD` environment variable to `PROD` in the `.env` file.
+
+Open the `.env` file with a text editor and change the value of `MOD` to `PROD`.
+
+```plaintext
+MOD=PROD
+```
+
+3. Start the production server.
 
 ```bash
 cd dist
