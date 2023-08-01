@@ -12,6 +12,10 @@
 
 - **Gallery Showcase:** Display your masterpieces in an elegant and dynamic gallery layout, enriched with captivating animations powered by GSAP.
 
+- **3D Gallery with Three.js:** Showcase your masterpieces in an elegant and dynamic 3D gallery powered by Three.js. Experience the immersive 3D environment that enhances the way your artworks are presented.
+
+- **GSAP Animations:** Enjoy captivating animations with GSAP (GreenSock Animation Platform) to add delightful transitions and movements to the user interface.
+
 ## 🔧 Installation & Requirements
 
 Before getting started, ensure you have the following installed on your system:
@@ -92,7 +96,7 @@ cd client
 npm run build
 
 # Build server
-cd ../server
+cd ..
 npm run build
 ```
 
@@ -112,8 +116,6 @@ npm start
 ```
 
 The production server will start on `http://localhost:8080`, and your Art Gallery application will be accessible through that address.
-
-Certainly! Here's the updated "Dependencies" section with different emojis for server and client dependencies:
 
 ## 📦 Dependencies:
 
