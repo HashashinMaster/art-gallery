@@ -1,6 +1,6 @@
 # Art Gallery Website - MERN Stack
 
-🎨 Welcome to Art Gallery - an interactive web application that allows you to create, customize, and animate paintings, generate AI voice documentaries for your artworks, and showcase them in a beautiful gallery with stunning animations using GSAP!
+🎨 Welcome to Art Gallery - an interactive web application that allows you to create, customize, and animate paintings, generate AI voice documentaries for your artworks, and showcase them in a stunning 3D gallery using Three.js and GSAP for captivating animations!
 
 ## 🚀 Features
 
