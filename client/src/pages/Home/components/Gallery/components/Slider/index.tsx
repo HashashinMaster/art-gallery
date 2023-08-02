@@ -53,8 +53,7 @@ export default function Slider({ paints }: Props) {
   const slidePositionMultiplier = slider?.slidePosition === "left" ? -1 : 1;
   useEffect(() => {
     if (slider?.index === paints.length - 1) slider.setLastIndex(true);
-    if (slider?.index !== paints.length - 1 && slider?.lastIndex === true)
-      console.log(slider?.startSliding);
+    if (slider!.index < paints.length - 1) slider!.setLastIndex(false);
     if (slider?.startSliding) {
       gsap.to(groupRef.current.position, {
         z: 8 * slidePositionMultiplier,
