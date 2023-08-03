@@ -171,3 +171,7 @@ The production server will start on `http://localhost:8080`, and your Art Galler
 This project is licensed under the [MIT License](LICENSE).
 
 Happy painting and showcasing! 🎉
+
+## 🌐 App demo
+
+[![image thumb](https://img.youtube.com/vi/rleGf2vD0yk/default.jpg)](https://www.youtube.com/watch?v=rleGf2vD0yk&ab_channel=HashashinMaster)
